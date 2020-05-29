@@ -17,57 +17,32 @@ const day = d.getDate();
 const nowdate = year + "/" + month + "/" + day
 const nowdatestr = String(nowdate)
 
-async function createcons() {
-let cons = await createConnections([
-  {
-     "synchronize": false,
-     "logging": false,
-     "name" : "Message" ,
-     "database": "Message.db",
-     "type": "sqlite",
-     "entities": [
-        "src/entity/Message.ts"
-     ],
-     "migrations": [
-        "src/migration/**/*.ts"
-     ],
-     "subscribers": [
-        "src/subscriber/**/*.ts"
-     ],
-     "cli": {
-        "entitiesDir": "src/entity",
-        "migrationsDir": "src/migration",
-        "subscribersDir": "src/subscriber"
-     }
-  },
-  {
-     "synchronize": false,
-     "logging": false,
-     "name" : "Book" ,
-     "database": "Book.db",
-     "type": "sqlite",
-     "entities": [
-        "src/entity/Book.ts"
-     ],
-     "migrations": [
-        "src/migration/**/*.ts"
-     ],
-     "subscribers": [
-        "src/subscriber/**/*.ts"
-     ],
-     "cli": {
-        "entitiesDir": "src/entity",
-        "migrationsDir": "src/migration",
-        "subscribersDir": "src/subscriber"
-     }
-  }
-  ])
-}
-
 // 텔레그램 봇
 async function getTelegramMessage() {
   let finalmessage: string = ""
-  let getMessage = await createcons()
+  let getMessage = await createConnection(
+    {
+      "synchronize": false,
+      "logging": false,
+      "name" : "Message" ,
+      "database": "Message.db",
+      "type": "sqlite",
+      "entities": [
+         "src/entity/Message.ts"
+      ],
+      "migrations": [
+         "src/migration/**/*.ts"
+      ],
+      "subscribers": [
+         "src/subscriber/**/*.ts"
+      ],
+      "cli": {
+         "entitiesDir": "src/entity",
+         "migrationsDir": "src/migration",
+         "subscribersDir": "src/subscriber"
+      }
+   }
+  )
   .then(async conn => {
       const house = await getConnection("Message")
           .createQueryBuilder()
@@ -88,7 +63,29 @@ async function getTelegramMessage() {
 // 북봇
 async function getBook() {
   let finalBook: string = ""
-  let getBook = await createcons()
+  let getBook = await createConnection(
+    {
+      "synchronize": false,
+      "logging": false,
+      "name" : "Book" ,
+      "database": "Book.db",
+      "type": "sqlite",
+      "entities": [
+         "src/entity/Book.ts"
+      ],
+      "migrations": [
+         "src/migration/**/*.ts"
+      ],
+      "subscribers": [
+         "src/subscriber/**/*.ts"
+      ],
+      "cli": {
+         "entitiesDir": "src/entity",
+         "migrationsDir": "src/migration",
+         "subscribersDir": "src/subscriber"
+      }
+   }
+  )
     .then(async conn => {
       const house = await getConnection("Book")
           .createQueryBuilder()
@@ -165,7 +162,7 @@ async function main(finaltitle:string, finalmessage: string) {
 // getGiggle().then(data => { main(month + '월' + day + '일 기글HD', data) })
 // getBook().then(finalBook => { main("책읽읍시다 " + nowdate, finalBook) })
 
-getNews().then(message => { console.log(message + '\n') })
 getTelegramMessage().then(finalmessage => { console.log(finalmessage + '\n') })
+getNews().then(message => { console.log(message + '\n') })
 getGiggle().then(data => { console.log(data + '\n') })
 getBook().then(finalBook => { console.log(finalBook + '\n') })
