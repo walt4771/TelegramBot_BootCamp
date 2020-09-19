@@ -60,45 +60,6 @@ async function getTelegramMessage() {
   return finalmessage
 }
 
-// 북봇
-async function getBook() {
-  let finalBook: string = ""
-  let getBook = await createConnection(
-    {
-      "synchronize": false,
-      "logging": false,
-      "name" : "Book" ,
-      "database": "Book.db",
-      "type": "sqlite",
-      "entities": [
-         "src/entity/Book.ts"
-      ],
-      "migrations": [
-         "src/migration/**/*.ts"
-      ],
-      "subscribers": [
-         "src/subscriber/**/*.ts"
-      ],
-      "cli": {
-         "entitiesDir": "src/entity",
-         "migrationsDir": "src/migration",
-         "subscribersDir": "src/subscriber"
-      }
-   }
-  )
-    .then(async conn => {
-      const house = await getConnection("Book")
-          .createQueryBuilder()
-          .select("BOOK")
-          .from(Book, "BOOK")
-          .where("BOOK.DATE = :DATE", { DATE: nowdatestr })
-          .getMany()
-      var data = house[0].CONTENT;
-      finalBook = data.replace(/\r/g, "").replace(/\n/g, "<br>");
-    })
-  return finalBook
-}
-
 // 기글봇
 async function getGiggle() {
   const axios = require("axios");
