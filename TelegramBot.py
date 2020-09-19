@@ -9,15 +9,7 @@ dispacher = updater.dispatcher  # updater 에 기능 추가
 
 def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="이제 메세지를 보내셔도 됩니다\n\n"
-                                                                    "/history : 최근 메세지 기록\n"
-                                                                    "/dev : 개발자와 도움을 주신 분들")
-
-def dev(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="- 개발자\n  이수민(walt4771)\n\n"
-                                                                    "- PL관련 도움\n  이헌주 선배님\n  황성찬 선배님\n\n"
-                                                                    "- 베타테스터\n  김나영\n  송기원\n  유경상\n  이찬우\n  최주헌\n  최다몬\n\n"
-                                                                    "- Special Thanks\n  곽민규\n\n"
-                                                                    "- 도와주신 모든 분들께 감사합니다")
+                                                                    "/history : 최근 메세지 기록\n")
 
 def kungkung(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="gigyeon(기견)")
@@ -83,9 +75,6 @@ def insert(update, context):
 
 start_handler = CommandHandler('start', start)  # start 함수를 등록, 한글 불가
 dispacher.add_handler(start_handler)
-
-dev_handler = CommandHandler('dev', dev)
-dispacher.add_handler(dev_handler)
 
 kungkung_handler = CommandHandler('kungkung', kungkung)
 dispacher.add_handler(kungkung_handler)
