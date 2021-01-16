@@ -18,6 +18,3 @@ Kernel Version : 4.19
 
 > Requires **Authenticated TheCamp Account** and **Telegram Token** to run this code as intended
 
-
-
-http://shorturl.at/aF067
