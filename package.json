@@ -15,7 +15,7 @@
     "rss-parser": "^3.8.0",
     "sqlite3": "^4.2.0",
     "the-camp-lib": "^2.3.0",
-    "typeorm": "0.2.24"
+    "typeorm": "0.2.25"
   },
   "scripts": {
     "start": "ts-node src/index.ts"
